@@ -6,8 +6,8 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const FileStore = require('session-file-store')(session);
 const indexRouter = require('./routers/indexRouter');
-// const checkSession = require('./middlewares/checkSession');
-// const checkAuth = require('./middlewares/checkAuth');
+const checkSession = require('./middlewares/checkSession');
+
 
 const app = express();
 const PORT = process.env.PORT ?? 3000;
@@ -36,7 +36,7 @@ app.use(express.json());
 app.use(express.static(path.join(process.env.PWD, 'public')));
 app.use(cookieParser());
 
-// app.use(checkSession);
+app.use(checkSession);
 
 app.use('/', indexRouter);
 
